@@ -39,7 +39,7 @@ func (m *Matchmaker) run() {
     //ADD DEFER
     log.Println("Matchmaker go routine started...")
     ticker := time.NewTicker(1 * time.Second)
-    maxPartyWait := time.NewTimer(5 * time.Second)
+    maxPartyWait := time.NewTicker(5 * time.Second)
 
     go func() {
         for {

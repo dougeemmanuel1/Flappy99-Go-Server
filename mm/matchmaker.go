@@ -50,6 +50,7 @@ func (m *Matchmaker) run() {
                 log.Println("Added party %d to queue", p.id)
                 m.partiesInQueue = append(m.partiesInQueue, p)
             case <- maxPartyWait.C:
+                log.Println("Reached max waiting time for party")
                 m.sendToGameServer()
             }
         }

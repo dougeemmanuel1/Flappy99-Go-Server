@@ -8,7 +8,7 @@ import (
 )
 
 const (
-    playersNeededToStart int = 2
+    playersNeededToStart int = 99
 )
 
 //Will attempt to create matches of 99 and ship them off to the game server
@@ -39,7 +39,7 @@ func (m *Matchmaker) run() {
     //ADD DEFER
     log.Println("Matchmaker go routine started...")
     ticker := time.NewTicker(1 * time.Second)
-    maxPartyWait := time.NewTimer(10 * time.Second)
+    maxPartyWait := time.NewTimer(5 * time.Second)
 
     go func() {
         for {

@@ -5,7 +5,6 @@ import (
     "time"
     // "encoding/json"
     "container/list"
-    cfg "app/network-utilities/config"
 )
 const (
     //Ticks per second

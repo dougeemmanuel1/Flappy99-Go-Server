@@ -14,6 +14,20 @@ const ROOM_CAP = 100
 var gameRooms = make([]*GameRoom, 0, ROOM_CAP)
 var mtx sync.Mutex
 
+//ticks per second every 16
+const GAMESERVER_TICKRATE = 16
+
+//Packet delay
+const PACKET_DELAY = 100
+
+
+//max time game rooms will wait for all clinets to c
+const MaxConnectionWaitTime = 5
+
+const MM_SERVER_URL = "localhost:8080"
+const GS_SERVER_URL = "localhost:8081"
+
+
 func main() {
     log.Println("Game Server starting, listening on PORT:", PORT)
 

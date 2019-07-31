@@ -4,7 +4,6 @@ import (
     "log"
     "time"
     "net/http"
-    "app/network-utilities/config"
     "io/ioutil"
 )
 
@@ -124,7 +123,7 @@ func (m *Matchmaker) isMatchFull() bool {
 //players we created
 func (m *Matchmaker) sendToGameServer() {
     log.Println("Match full sending to game server...")
-    resp, err := http.Get("http://" + config.GS_SERVER_URL + "/requestRoom")
+    resp, err := http.Get("http://" + GS_SERVER_URL + "/requestRoom")
 
     if(err != nil) {
         //TODO MORE ROBUST HANLDING FOR FAILURE

@@ -13,7 +13,7 @@ import (
 )
 
 const MM_SERVER_URL = "localhost:8080"
-const GS_SERVER_URL = "localhost:8081"
+const GS_SERVER_URL = "3.90.207.135:8080"
 
 
 //Port to listen on

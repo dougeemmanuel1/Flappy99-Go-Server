@@ -9,7 +9,7 @@ import (
   "github.com/gorilla/mux"  //eases route handling
 )
 //Port to listen on
-const PORT = "8081"
+const PORT = "8080"
 const ROOM_CAP = 100
 var gameRooms = make([]*GameRoom, 0, ROOM_CAP)
 var mtx sync.Mutex

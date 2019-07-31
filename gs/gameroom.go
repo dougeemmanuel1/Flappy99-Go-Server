@@ -42,7 +42,7 @@ type GameRoom struct {
 }
 
 func newGameRoom(id int) *GameRoom {
-    log.Println("New game room created.", cfg.GAMESERVER_TICKRATE)
+    log.Println("New game room created.", TICK_RATE)
     return &GameRoom{
         logic:      newGameLogic(),
         clients:    []*Client{},

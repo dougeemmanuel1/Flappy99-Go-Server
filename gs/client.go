@@ -112,10 +112,10 @@ func (c *Client) read() {
         message := Payload{}
         err := c.conn.ReadJSON(&message)
         if err != nil {
-            log.Printf("Error Reading JSON Client:", err)
+            // log.Printf("Error Reading JSON Client:", err)
             if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway,
                                                      websocket.CloseAbnormalClosure) {
-                log.Printf("error: %v", err)
+                // log.Printf("error: %v", err)
             }
             break //quit read
         }

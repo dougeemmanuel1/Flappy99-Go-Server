@@ -95,7 +95,7 @@ func (c *Client) write() {
 //ensures that there is at most one reader on a connection by executing all
 //reads form this goroutine.
 func (c *Client) read() {
-    log.Println("Starting cli read")
+    // log.Println("Starting cli read")
     defer func() {
         c.room.unregister <- c
         c.conn.Close()

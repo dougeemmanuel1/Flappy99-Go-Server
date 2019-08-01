@@ -50,8 +50,13 @@ func (m *Matchmaker) run() {
                 log.Println("Added party %d to queue", p.id)
                 m.partiesInQueue = append(m.partiesInQueue, p)
             case <- maxPartyWait.C:
-                log.Println("Reached max waiting time for party")
-                if(len(m.partiesMatched) != 0) {
+                numMatched := len(m.partiesMatched)
+                if(numMatched == 1) {
+                    log.Println("Only one person queueing, recycling..")
+                } else if(numMatched == 0) {
+                    log.Println("No people in queue skipping..")
+                } else {
+                    log.Println("Reached max waiting time for party")
                     m.sendToGameServer()
                 }
             }

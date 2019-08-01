@@ -78,8 +78,13 @@ func (c *Client) write() {
                 return  //end go routine
             }
 
-            log.Println("Sending message to client:", message)
+            // log.Println("Sending message to client:", message)
             c.conn.WriteJSON(message)
+        case <-ticker.C:
+            c.conn.SetWriteDeadline(time.Now().Add(writeWait))
+			if err := c.conn.WriteMessage(websocket.PingMessage, nil); err != nil {
+				return
+			}
         }
     }
 }
@@ -89,7 +94,7 @@ func (c *Client) write() {
 //ensures that there is at most one reader on a connection by executing all
 //reads form this goroutine.
 func (c *Client) read() {
-    log.Println("Starting cli read")
+    // log.Println("Starting cli read")
     defer func() {
         c.party.unregister <- c
         c.conn.Close()
@@ -116,7 +121,7 @@ func (c *Client) read() {
             break //quit read
         }
 
-        log.Println("Message received from client:", message)
+        // log.Println("Message received from client:", message)
         // message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
         //send messsage we received from client to the party
         c.party.broadcast <- message

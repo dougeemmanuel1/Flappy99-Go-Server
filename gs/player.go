@@ -76,7 +76,7 @@ func (p *Player) apply(d *PlayerData, ts int64) {
 
 func (p *Player) kill() {
     p.isDead = true
-    log.Println("A player died.")
+    // log.Println("A player died.")
 }
 
 //Jiggles some of the X and y values around each update

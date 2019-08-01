@@ -42,7 +42,7 @@ type GameRoom struct {
 }
 
 func newGameRoom(id int) *GameRoom {
-    log.Println("New game room created.", TICK_RATE)
+    log.Println("Game room created.", TICK_RATE)
     return &GameRoom{
         logic:      newGameLogic(),
         clients:    []*Client{},
@@ -71,7 +71,7 @@ func (g *GameRoom) run() {
             select {
             case client := <-g.register: //clients try to join
                 g.clients = append(g.clients, client)
-                log.Println("Client registered, total clients:", len(g.clients))
+                // log.Println("Client registered, total clients:", len(g.clients))
 
                 //get an id for this newly connected client
                 client.id = g.createClientId()
@@ -99,14 +99,14 @@ func (g *GameRoom) startMatch() {
     defer func() {  //if for any reset this returns close all connections
         ticker.Stop()
     }()
-    log.Println("Starting match...")
+    // log.Println("Starting match...")
 
     //have the game logic receive the starting list of entities with ids
     g.logic.initializeEntities(g.clients)
 
     startingState := g.logic.packageStartingState()
 
-    log.Println("Starting state had %d players.", len(startingState.Players))
+    // log.Println("Starting state had %d players.", len(startingState.Players))
 
     //send initial state of al clients
     g.dispatchToAllClients(&startingState)
@@ -114,7 +114,7 @@ func (g *GameRoom) startMatch() {
     for {
         select {
         case <-ticker.C:
-            log.Printf("GR:%d Update Tick.", g.id)
+            // log.Printf("GR:%d Update Tick.", g.id)
 
             //current timestamp
             ts := time.Now().UnixNano() / 1000000
@@ -138,7 +138,7 @@ func (g *GameRoom) startMatch() {
             g.messages.PushBack(&payload)
         case client := <-g.unregister: //clients disconnecting
             //TODO ADD MORE ROBUST RESPONSE TO DC
-            log.Println("Received unregister")
+            // log.Println("Received unregister")
             g.disconnect(client)
         case <-g.close:
             g.closeRoom()
@@ -164,14 +164,14 @@ func (g *GameRoom) closeRoom() {
 }
 
 func (g *GameRoom) dispatchToAllClients(msg *Payload) {
-    log.Println("Dispatch to all:", *msg)
+    // log.Println("Dispatch to all:", *msg)
     for _, client := range g.clients {
         client.send <- *msg
     }
 }
 
 func (g *GameRoom) disconnect(c *Client) {
-    log.Println("Client disconnected from room:", g.id)
+    // log.Println("Client disconnected from room:", g.id)
     g.clients = removeClient(g.clients, c)
     close(c.send)       //close websocket
 }

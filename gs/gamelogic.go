@@ -34,19 +34,19 @@ func (l *GameLogic) initializeEntities(clients []*Client) {
     }
 
 
-    log.Printf("Initialized %d starting entities.", len(clients))
+    // log.Printf("Initialized %d starting entities.", len(clients))
 }
 func newGameLogic() *GameLogic {
     l := &GameLogic{
         players: make(map[int]*Player),
     }
-    log.Println("Game logic created")
+    // log.Println("Game logic created")
     return l
 }
 
 //loop over all messages and apply them to the world
 func (l *GameLogic) processInput(messages *list.List, ts int64) {
-    log.Println("Processing input...")
+    // log.Println("Processing input...")
     for m := messages.Front(); m != nil; m = m.Next() {
         //cast from list element to payload so we can read it
         payload := m.Value.(*Payload)
@@ -84,17 +84,17 @@ func (l *GameLogic) packageWorldState() Payload {
     //If theres players-1 dead players, then there is one plyaer alive.
     //He is the winner figure out who it is and set the winner on payload
     if(len(l.players)-1 == numDead) {
-        log.Println("Match should be over")
-        l.matchEnded = true 
+        // log.Println("Match should be over")
+        l.matchEnded = true
         for _, player := range l.players {
             if(!player.isDead) {
                 p.Winner = player.id
                 break
             } else {
-                log.Printf("id:%d Player is dead, total players: %d, dead: %d", player.id, len(l.players), numDead)
+                // log.Printf("id:%d Player is dead, total players: %d, dead: %d", player.id, len(l.players), numDead)
             }
         }
-        log.Printf("Winner has id: %d", p.Winner)
+        // log.Printf("Winner has id: %d", p.Winner)
     }
 
 
@@ -108,6 +108,6 @@ func (l *GameLogic) packageStartingState() Payload {
         data, _ := v.packageData();
         p.Players = append(p.Players, data)
     }
-    log.Println("Starting state:", len(p.Players))
+    // log.Println("Starting state:", len(p.Players))
     return p
 }

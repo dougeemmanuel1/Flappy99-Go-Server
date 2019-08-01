@@ -38,10 +38,10 @@ func main() {
 //to their ws protocol request. ex: ws://localhost:8080/ws?id=100
 //ROOM_CAP routes so we can serve them a websocket and they can connect to their respective rooms.
 func connectToGameRoom(w http.ResponseWriter, r  *http.Request) {
-    log.Println("GET parameters for connection to game room were:", r.URL.Query())
+    // log.Println("GET parameters for connection to game room were:", r.URL.Query())
     idParam := r.URL.Query().Get("id")    //get id
     if(idParam != "") { //not empty
-        log.Println("Client attempting to connect with id:", idParam)
+        // log.Println("Client attempting to connect with id:", idParam)
 
         //convert id to int
         id, err := strconv.Atoi(idParam);
@@ -54,7 +54,7 @@ func connectToGameRoom(w http.ResponseWriter, r  *http.Request) {
 }
 
 func requestRoom(w http.ResponseWriter, r *http.Request) {
-    log.Println("Request for room received")
+    // log.Println("Request for room received")
     _, id := createGameRoom()
     if(id == -1) {
         log.Println("Capacity for rooms reached.")

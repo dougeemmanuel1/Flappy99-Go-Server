@@ -40,7 +40,7 @@ func newGameLogic() *GameLogic {
     l := &GameLogic{
         players: make(map[int]*Player),
     }
-    // log.Println("Game logic created")
+    log.Println("Game logic created")
     return l
 }
 
